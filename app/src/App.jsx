@@ -12,7 +12,7 @@ import './styles.css';
 const ROASTERS = ['all', 'olisipo', '7g', 'senzu'];
 
 const SORTS = [
-  { value: 'availability', label: 'Available first' },
+  { value: 'available-first', label: 'Available first' },
   { value: 'price-asc', label: 'Price: low to high' },
   { value: 'price-desc', label: 'Price: high to low' },
 ];
@@ -80,9 +80,9 @@ function App() {
   const [roaster, setRoaster] = useState('all');
   const [purpose, setPurpose] = useState('all');
   const [query, setQuery] = useState('');
-  const [sort, setSort] = useState('availability');
+  const [sort, setSort] = useState('available-first');
   const [hidePurchased, setHidePurchased] = useState(false);
-  const [unavailableOnly, setUnavailableOnly] = useState(false);
+  const [hideUnavailable, setHideUnavailable] = useState(false);
   const [purchases, setPurchases] = useState(() => loadPurchases());
 
   useEffect(() => {
@@ -99,13 +99,13 @@ function App() {
       roaster,
       purpose,
       query,
-      unavailableOnly,
+      hideUnavailable,
     });
     if (hidePurchased) {
       coffees = coffees.filter((coffee) => !purchasedIds.has(coffee.id));
     }
     return sortCoffees(coffees, sort);
-  }, [roaster, purpose, query, unavailableOnly, sort, hidePurchased, purchasedIds]);
+  }, [roaster, purpose, query, hideUnavailable, sort, hidePurchased, purchasedIds]);
 
   const togglePurchased = (coffeeId) => {
     setPurchases((current) => markPurchased(current, coffeeId, !isPurchased(current, coffeeId)));
@@ -157,10 +157,10 @@ function App() {
         <label className="check">
           <input
             type="checkbox"
-            checked={unavailableOnly}
-            onChange={(e) => setUnavailableOnly(e.target.checked)}
+            checked={hideUnavailable}
+            onChange={(e) => setHideUnavailable(e.target.checked)}
           />
-          No longer available
+          Hide no longer available
         </label>
         <label className="check">
           <input
