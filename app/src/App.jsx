@@ -12,7 +12,7 @@ import './styles.css';
 const ROASTERS = ['all', 'olisipo', '7g', 'senzu'];
 
 const SORTS = [
-  { value: 'availability', label: 'Availability' },
+  { value: 'availability', label: 'Available first' },
   { value: 'price-asc', label: 'Price: low to high' },
   { value: 'price-desc', label: 'Price: high to low' },
 ];
