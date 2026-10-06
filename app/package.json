@@ -8,6 +8,7 @@
     "dev": "vite",
     "prebuild": "node ../scraper/copy-catalog.js",
     "build": "vite build",
+    "build:single": "vite build --mode single --outDir dist-single --emptyOutDir",
     "preview": "vite preview",
     "test": "vitest run"
   },
@@ -18,6 +19,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^5.1.4",
     "vite": "^7.1.9",
+    "vite-plugin-singlefile": "^2.3.3",
     "vitest": "^3.2.4"
   }
 }
