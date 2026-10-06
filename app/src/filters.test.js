@@ -66,8 +66,9 @@ describe('filterCoffees', () => {
 });
 
 describe('sortCoffees', () => {
-  it('sorts available first for available-first', () => {
+  it('sorts available first, then by price ascending within each group', () => {
     const result = sortCoffees(coffees, 'available-first');
+    expect(result.map((coffee) => coffee.id)).toEqual(['olisipo:c', 'olisipo:a', '7g:b']);
     expect(result[0].available).toBe(true);
     expect(result[result.length - 1].available).toBe(false);
   });

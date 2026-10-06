@@ -37,9 +37,15 @@ export function sortCoffees(coffees, sort = 'name') {
       (a, b) => a.roaster.localeCompare(b.roaster) || a.name.localeCompare(b.name)
     );
   } else if (sort === 'available-first') {
-    sorted.sort(
-      (a, b) => Number(b.available) - Number(a.available) || a.name.localeCompare(b.name)
-    );
+    const byPriceAsc = (a, b) => {
+      const aPrice = a.price ? a.price.amount : null;
+      const bPrice = b.price ? b.price.amount : null;
+      if (aPrice === null && bPrice === null) return a.name.localeCompare(b.name);
+      if (aPrice === null) return 1;
+      if (bPrice === null) return -1;
+      return aPrice - bPrice || a.name.localeCompare(b.name);
+    };
+    sorted.sort((a, b) => Number(b.available) - Number(a.available) || byPriceAsc(a, b));
   } else if (sort === 'price-asc' || sort === 'price-desc') {
     const direction = sort === 'price-asc' ? 1 : -1;
     sorted.sort((a, b) => {
