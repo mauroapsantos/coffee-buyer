@@ -11,10 +11,10 @@ import './styles.css';
 
 const ROASTERS = ['all', 'olisipo', '7g'];
 
-const AVAILABILITIES = [
-  { value: 'all', label: 'All' },
-  { value: 'available', label: 'Available' },
-  { value: 'unavailable', label: 'No longer available' },
+const SORTS = [
+  { value: 'availability', label: 'Availability' },
+  { value: 'price-asc', label: 'Price: low to high' },
+  { value: 'price-desc', label: 'Price: high to low' },
 ];
 
 function CoffeeCard({ coffee, purchased, onTogglePurchased }) {
@@ -79,9 +79,10 @@ function CoffeeCard({ coffee, purchased, onTogglePurchased }) {
 function App() {
   const [roaster, setRoaster] = useState('all');
   const [purpose, setPurpose] = useState('all');
-  const [availability, setAvailability] = useState('all');
   const [query, setQuery] = useState('');
+  const [sort, setSort] = useState('availability');
   const [hidePurchased, setHidePurchased] = useState(false);
+  const [unavailableOnly, setUnavailableOnly] = useState(false);
   const [purchases, setPurchases] = useState(() => loadPurchases());
 
   useEffect(() => {
@@ -98,13 +99,13 @@ function App() {
       roaster,
       purpose,
       query,
-      availability,
+      unavailableOnly,
     });
     if (hidePurchased) {
       coffees = coffees.filter((coffee) => !purchasedIds.has(coffee.id));
     }
-    return sortCoffees(coffees, 'availability');
-  }, [roaster, purpose, query, availability, hidePurchased, purchasedIds]);
+    return sortCoffees(coffees, sort);
+  }, [roaster, purpose, query, unavailableOnly, sort, hidePurchased, purchasedIds]);
 
   const togglePurchased = (coffeeId) => {
     setPurchases((current) => markPurchased(current, coffeeId, !isPurchased(current, coffeeId)));
@@ -139,14 +140,22 @@ function App() {
               </option>
             ))}
           </select>
-          <select value={availability} onChange={(e) => setAvailability(e.target.value)}>
-            {AVAILABILITIES.map((option) => (
+          <select value={sort} onChange={(e) => setSort(e.target.value)}>
+            {SORTS.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </select>
         </div>
+        <label className="check">
+          <input
+            type="checkbox"
+            checked={unavailableOnly}
+            onChange={(e) => setUnavailableOnly(e.target.checked)}
+          />
+          No longer available
+        </label>
         <label className="check">
           <input
             type="checkbox"

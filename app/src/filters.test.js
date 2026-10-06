@@ -36,30 +36,30 @@ const coffees = [
 
 describe('filterCoffees', () => {
   it('returns all with default filters', () => {
-    expect(filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', availability: 'all' })).toHaveLength(3);
+    expect(filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', unavailableOnly: false })).toHaveLength(3);
   });
 
   it('filters by roaster', () => {
-    const result = filterCoffees(coffees, { roaster: '7g', purpose: 'all', query: '', availability: 'all' });
+    const result = filterCoffees(coffees, { roaster: '7g', purpose: 'all', query: '', unavailableOnly: false });
     expect(result).toHaveLength(1);
     expect(result[0].roaster).toBe('7g');
   });
 
   it('filters by purpose', () => {
-    const result = filterCoffees(coffees, { roaster: 'all', purpose: 'espresso', query: '', availability: 'all' });
+    const result = filterCoffees(coffees, { roaster: 'all', purpose: 'espresso', query: '', unavailableOnly: false });
     expect(result).toHaveLength(1);
     expect(result[0].id).toBe('olisipo:a');
   });
 
-  it('filters by availability', () => {
-    const result = filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', availability: 'unavailable' });
+  it('keeps only unavailable coffees when checkbox is set', () => {
+    const result = filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', unavailableOnly: true });
     expect(result).toHaveLength(1);
     expect(result[0].available).toBe(false);
   });
 
   it('searches name, producer and notes', () => {
     for (const query of ['tambo', 'asmucafe', 'blackcurrant']) {
-      const result = filterCoffees(coffees, { roaster: 'all', purpose: 'all', query, availability: 'all' });
+      const result = filterCoffees(coffees, { roaster: 'all', purpose: 'all', query, unavailableOnly: false });
       expect(result).toHaveLength(1);
     }
   });
@@ -70,6 +70,16 @@ describe('sortCoffees', () => {
     const result = sortCoffees(coffees, 'availability');
     expect(result[0].available).toBe(true);
     expect(result[result.length - 1].available).toBe(false);
+  });
+
+  it('sorts by price ascending, coffees without price last', () => {
+    const result = sortCoffees(coffees, 'price-asc');
+    expect(result.map((coffee) => coffee.id)).toEqual(['olisipo:c', 'olisipo:a', '7g:b']);
+  });
+
+  it('sorts by price descending, coffees without price last', () => {
+    const result = sortCoffees(coffees, 'price-desc');
+    expect(result.map((coffee) => coffee.id)).toEqual(['olisipo:a', 'olisipo:c', '7g:b']);
   });
 });
 
