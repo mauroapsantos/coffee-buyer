@@ -6,12 +6,12 @@ export const PURPOSES = [
   { value: 'both', label: 'Espresso & Filter' },
 ];
 
-export function filterCoffees(coffees, { roaster, purpose, query, unavailableOnly }) {
+export function filterCoffees(coffees, { roaster, purpose, query, hideUnavailable }) {
   const normalizedQuery = query.trim().toLowerCase();
   return coffees.filter((coffee) => {
     if (roaster !== 'all' && coffee.roaster !== roaster) return false;
     if (purpose !== 'all' && coffee.purpose !== purpose) return false;
-    if (unavailableOnly && coffee.available) return false;
+    if (hideUnavailable && !coffee.available) return false;
     if (normalizedQuery) {
       const haystack = [
         coffee.name,
