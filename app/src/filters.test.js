@@ -51,6 +51,22 @@ describe('filterCoffees', () => {
     expect(result[0].id).toBe('olisipo:a');
   });
 
+  it('filters by country derived from the name', () => {
+    const result = filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', availability: 'all', country: 'kenya' });
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('7g:b');
+  });
+
+  it('ignores unknown countries', () => {
+    const result = filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', availability: 'all', country: 'brazil' });
+    expect(result).toHaveLength(0);
+  });
+
+  it('returns all when country is all or missing', () => {
+    expect(filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', availability: 'all', country: 'all' })).toHaveLength(3);
+    expect(filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', availability: 'all' })).toHaveLength(3);
+  });
+
   it('filters by availability', () => {
     const result = filterCoffees(coffees, { roaster: 'all', purpose: 'all', query: '', availability: 'unavailable' });
     expect(result).toHaveLength(1);

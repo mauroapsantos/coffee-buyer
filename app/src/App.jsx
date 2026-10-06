@@ -7,6 +7,7 @@ import {
   isPurchased,
 } from './purchases.js';
 import { PURPOSES, filterCoffees, sortCoffees, formatPrice } from './filters.js';
+import { collectCountries, countryLabel } from './countries.js';
 import './styles.css';
 
 const ROASTERS = ['all', 'olisipo', '7g'];
@@ -44,6 +45,12 @@ function CoffeeCard({ coffee, purchased, onTogglePurchased }) {
         <p className="notes">{coffee.notes.join(' · ')}</p>
       )}
       <dl className="facts">
+        {countryLabel(coffee) && (
+          <div>
+            <dt>Country</dt>
+            <dd>{countryLabel(coffee)}</dd>
+          </div>
+        )}
         {coffee.origin.producer && (
           <div>
             <dt>Producer</dt>
@@ -78,6 +85,7 @@ function CoffeeCard({ coffee, purchased, onTogglePurchased }) {
 
 function App() {
   const [roaster, setRoaster] = useState('all');
+  const [country, setCountry] = useState('all');
   const [purpose, setPurpose] = useState('all');
   const [availability, setAvailability] = useState('all');
   const [query, setQuery] = useState('');
@@ -87,6 +95,8 @@ function App() {
   useEffect(() => {
     savePurchases(purchases);
   }, [purchases]);
+
+  const countries = useMemo(() => collectCountries(catalog.coffees), []);
 
   const purchasedIds = useMemo(
     () => new Set(purchases.map((entry) => entry.coffeeId)),
@@ -99,12 +109,13 @@ function App() {
       purpose,
       query,
       availability,
+      country,
     });
     if (hidePurchased) {
       coffees = coffees.filter((coffee) => !purchasedIds.has(coffee.id));
     }
     return sortCoffees(coffees, 'availability');
-  }, [roaster, purpose, query, availability, hidePurchased, purchasedIds]);
+  }, [roaster, purpose, query, availability, country, hidePurchased, purchasedIds]);
 
   const togglePurchased = (coffeeId) => {
     setPurchases((current) => markPurchased(current, coffeeId, !isPurchased(current, coffeeId)));
@@ -136,6 +147,14 @@ function App() {
             {PURPOSES.map((purpose) => (
               <option key={purpose.value} value={purpose.value}>
                 {purpose.label}
+              </option>
+            ))}
+          </select>
+          <select value={country} onChange={(e) => setCountry(e.target.value)}>
+            <option value="all">All countries</option>
+            {countries.map((entry) => (
+              <option key={entry.value} value={entry.value}>
+                {entry.label}
               </option>
             ))}
           </select>

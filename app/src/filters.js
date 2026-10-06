@@ -1,3 +1,5 @@
+import { countryFromCoffee } from './countries.js';
+
 export const PURPOSES = [
   { value: 'all', label: 'All' },
   { value: 'general', label: 'General' },
@@ -6,11 +8,12 @@ export const PURPOSES = [
   { value: 'both', label: 'Espresso & Filter' },
 ];
 
-export function filterCoffees(coffees, { roaster, purpose, query, availability }) {
+export function filterCoffees(coffees, { roaster, purpose, query, availability, country }) {
   const normalizedQuery = query.trim().toLowerCase();
   return coffees.filter((coffee) => {
     if (roaster !== 'all' && coffee.roaster !== roaster) return false;
     if (purpose !== 'all' && coffee.purpose !== purpose) return false;
+    if (country && country !== 'all' && countryFromCoffee(coffee) !== country) return false;
     if (availability === 'available' && !coffee.available) return false;
     if (availability === 'unavailable' && coffee.available) return false;
     if (normalizedQuery) {
