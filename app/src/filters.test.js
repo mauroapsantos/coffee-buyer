@@ -66,8 +66,8 @@ describe('filterCoffees', () => {
 });
 
 describe('sortCoffees', () => {
-  it('sorts available first for availability', () => {
-    const result = sortCoffees(coffees, 'availability');
+  it('sorts available first for available-first', () => {
+    const result = sortCoffees(coffees, 'available-first');
     expect(result[0].available).toBe(true);
     expect(result[result.length - 1].available).toBe(false);
   });

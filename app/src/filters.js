@@ -36,7 +36,7 @@ export function sortCoffees(coffees, sort = 'name') {
     sorted.sort(
       (a, b) => a.roaster.localeCompare(b.roaster) || a.name.localeCompare(b.name)
     );
-  } else if (sort === 'availability') {
+  } else if (sort === 'available-first') {
     sorted.sort(
       (a, b) => Number(b.available) - Number(a.available) || a.name.localeCompare(b.name)
     );

@@ -12,7 +12,7 @@ import './styles.css';
 const ROASTERS = ['all', 'olisipo', '7g', 'senzu'];
 
 const SORTS = [
-  { value: 'availability', label: 'Available first' },
+  { value: 'available-first', label: 'Available first' },
   { value: 'price-asc', label: 'Price: low to high' },
   { value: 'price-desc', label: 'Price: high to low' },
 ];
@@ -80,7 +80,7 @@ function App() {
   const [roaster, setRoaster] = useState('all');
   const [purpose, setPurpose] = useState('all');
   const [query, setQuery] = useState('');
-  const [sort, setSort] = useState('availability');
+  const [sort, setSort] = useState('available-first');
   const [hidePurchased, setHidePurchased] = useState(false);
   const [unavailableOnly, setUnavailableOnly] = useState(false);
   const [purchases, setPurchases] = useState(() => loadPurchases());
