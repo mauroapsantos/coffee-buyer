@@ -54,7 +54,7 @@ function mergeCatalog(previous, scraped, scrapeDate = today()) {
 
   return {
     updatedAt: scrapeDate,
-    roasters: ['olisipo', '7g'],
+    roasters: ['olisipo', '7g', 'senzu'],
     coffees,
   };
 }
