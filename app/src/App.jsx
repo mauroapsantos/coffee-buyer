@@ -9,7 +9,7 @@ import {
 import { PURPOSES, filterCoffees, sortCoffees, formatPrice } from './filters.js';
 import './styles.css';
 
-const ROASTERS = ['all', 'olisipo', '7g'];
+const ROASTERS = ['all', 'olisipo', '7g', 'senzu'];
 
 const SORTS = [
   { value: 'availability', label: 'Availability' },
@@ -129,7 +129,13 @@ function App() {
           <select value={roaster} onChange={(e) => setRoaster(e.target.value)}>
             {ROASTERS.map((value) => (
               <option key={value} value={value}>
-                {value === 'all' ? 'All roasters' : value === '7g' ? '7g Roaster' : 'Olisipo'}
+                {value === 'all'
+                  ? 'All roasters'
+                  : value === '7g'
+                    ? '7g Roaster'
+                    : value === 'senzu'
+                      ? 'Senzu'
+                      : 'Olisipo'}
               </option>
             ))}
           </select>

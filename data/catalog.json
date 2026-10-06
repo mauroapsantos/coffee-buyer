@@ -2,7 +2,8 @@
   "updatedAt": "2026-10-06",
   "roasters": [
     "olisipo",
-    "7g"
+    "7g",
+    "senzu"
   ],
   "coffees": [
     {
@@ -4785,6 +4786,457 @@
         {
           "date": "2026-10-06",
           "status": "unavailable"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "colombia-laspalmas",
+      "name": "COLOMBIA - Las Palmas",
+      "url": "https://shop.senzucoffee.com/products/colombia-laspalmas",
+      "available": true,
+      "purpose": "filter",
+      "origin": {
+        "producer": "Efren Echeverri",
+        "cultivar": [
+          "Tabi",
+          "Pink Bourbon"
+        ],
+        "process": "Natural Anaeróbico",
+        "altitude": "1650-1800m",
+        "harvest": null
+      },
+      "notes": [
+        "Melão",
+        "Mel",
+        "Frutos Roxos",
+        "Chá Preto"
+      ],
+      "price": {
+        "amount": 17.5,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/08-26-COLOMBIA-LASPALMAS-MOCKUP.png?v=1791043063",
+      "description": "Origem: Colômbia - Las Palmas\n\nProdutor: Efren Echeverri\n\nProcesso: Natural Anaeróbico\nVariedade: Tabi, Pink Bourbon\nAltitude: 1650-1800m\n\nNotas: Melão, Mel, Frutos Roxos, Chá Preto",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:colombia-laspalmas",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "colombia-papayo",
+      "name": "Colômbia Papayo",
+      "url": "https://shop.senzucoffee.com/products/colombia-papayo",
+      "available": false,
+      "purpose": "general",
+      "origin": {
+        "producer": null,
+        "cultivar": [],
+        "process": null,
+        "altitude": null,
+        "harvest": null
+      },
+      "notes": [],
+      "price": {
+        "amount": 0,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/01-26-EXPERIMENTAL-COLOMBIA1-MOCKUP.png?v=1769620801",
+      "description": "",
+      "weightOptions": [
+        "Default Title"
+      ],
+      "id": "senzu:colombia-papayo",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "unavailable"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "decaf",
+      "name": "DESCAFEINADO",
+      "url": "https://shop.senzucoffee.com/products/decaf",
+      "available": true,
+      "purpose": "espresso",
+      "origin": {
+        "producer": null,
+        "cultivar": [
+          "Castillo"
+        ],
+        "process": "Lavado - Sugar Cane Processo",
+        "altitude": "1500m",
+        "harvest": null
+      },
+      "notes": [
+        "Chocolate",
+        "Nozes",
+        "Baunilha"
+      ],
+      "price": {
+        "amount": 14,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/04-26-DESCAFEINADO-MOCKUP.png?v=1784030918",
+      "description": "Origem: Colômbia\nProcesso: Lavado - Sugar Cane Processo\nVariedade: Castillo\nAltitude: 1500m\nNotas: Chocolate, Nozes, Baunilha",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:decaf",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "el-professor-blend",
+      "name": "EL PROFESSOR - BLEND",
+      "url": "https://shop.senzucoffee.com/products/el-professor-blend",
+      "available": true,
+      "purpose": "espresso",
+      "origin": {
+        "producer": null,
+        "cultivar": [],
+        "process": null,
+        "altitude": null,
+        "harvest": null
+      },
+      "notes": [
+        "Baunilha",
+        "frutos vermelhos",
+        "frutos secos"
+      ],
+      "price": {
+        "amount": 13,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/04-26-ES-EL-PROFESSOR-MOCKUP_6184173a-03a5-4c3e-97aa-5ee78e148725.png?v=1784031148",
+      "description": "Origem:\n50% Brasil - Sra Aparecida - Natural\n25% Honduras - Tres Santos - Natural\n25% Colômbia - Puerto Rico - Lavado\n\nNotas: Baunilha, frutos vermelhos e frutos secos",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:el-professor-blend",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "espresso-puerto-rico",
+      "name": "COLÔMBIA - PUERTO RICO",
+      "url": "https://shop.senzucoffee.com/products/espresso-puerto-rico",
+      "available": true,
+      "purpose": "espresso",
+      "origin": {
+        "producer": "Don Dario e Iliana Delgado",
+        "cultivar": [
+          "Castillo"
+        ],
+        "process": "Lavado",
+        "altitude": "1500m",
+        "harvest": null
+      },
+      "notes": [
+        "Floral",
+        "Chocolate de Leite",
+        "Mel",
+        "Fruta Amarela"
+      ],
+      "price": {
+        "amount": 13,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/04-26-ES-PUERTORICO-MOCKUP_b6587989-1284-4133-b6f5-e2e77b78e850.png?v=1784030209",
+      "description": "Origem: Colômbia - Puerto Rico\nProdutor: Don Dario e Iliana Delgado\nProcesso: Lavado\nVariedade: Castillo\nAltitude: 1500m\nNotas: Floral, Chocolate de Leite, Mel, Fruta Amarela",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:espresso-puerto-rico",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "espresso-veracruz",
+      "name": "MEXICO - VERACRUZ",
+      "url": "https://shop.senzucoffee.com/products/espresso-veracruz",
+      "available": true,
+      "purpose": "espresso",
+      "origin": {
+        "producer": "Finca Monte Azul",
+        "cultivar": [
+          "Typica",
+          "Oro Azteca"
+        ],
+        "process": "Lavado",
+        "altitude": "1500m",
+        "harvest": null
+      },
+      "notes": [
+        "Chocolate",
+        "Cacau",
+        "Nozes",
+        "Mel"
+      ],
+      "price": {
+        "amount": 13,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/04-26-ES-VERACRUZ-MOCKUP.png?v=1784031361",
+      "description": "Origem: México - Veracruz\nProdutor: Finca Monte Azul\nProcesso: Lavado\nVariedade: Typica, Oro Azteca\nAltitude: 1500m\nNotas: Chocolate, Cacau, Nozes, Mel",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:espresso-veracruz",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "guatemala-buenavista",
+      "name": "GUATEMALA - BUENA VISTA",
+      "url": "https://shop.senzucoffee.com/products/guatemala-buenavista",
+      "available": true,
+      "purpose": "filter",
+      "origin": {
+        "producer": "Fredy Orantes",
+        "cultivar": [
+          "Catuaí"
+        ],
+        "process": "Natural",
+        "altitude": "1870m",
+        "harvest": null
+      },
+      "notes": [
+        "Caramelo",
+        "Frutos Tropicais",
+        "Maracujá",
+        "Ananás"
+      ],
+      "price": {
+        "amount": 17,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/08-26-GUATEMALA-BUENAVISTA-MOCKUP.png?v=1787341569",
+      "description": "Origem: Guatemala - Buena Vista\n\nProdutor: Fredy Orantes\n\nProcesso: Natural\nVariedade: Catuaí\nAltitude: 1870m\n\nNotas: Caramelo, Frutos Tropicais, Maracujá, Ananás",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:guatemala-buenavista",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "honduras-tres-santos",
+      "name": "HONDURAS - TRES SANTOS",
+      "url": "https://shop.senzucoffee.com/products/honduras-tres-santos",
+      "available": true,
+      "purpose": "espresso",
+      "origin": {
+        "producer": "Pequenos Produtores",
+        "cultivar": [
+          "IHCAFE-90",
+          "Lempira",
+          "Parainema"
+        ],
+        "process": "Natural",
+        "altitude": "1210-1520m",
+        "harvest": null
+      },
+      "notes": [
+        "Chocolate",
+        "Frutos Vermelhos",
+        "Caramelo",
+        "Manga"
+      ],
+      "price": {
+        "amount": 13,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/07-26-ES-HONDURAS-TRES_SANTOS-MOCKUP.png?v=1787911083",
+      "description": "Origem: Honduras - Tres Santos\nProdutor: Pequenos Produtores\nProcesso: Natural\nVariedade: IHCAFE-90, Lempira, Parainema\nAltitude: 1210-1520m\nNotas: Chocolate, Frutos Vermelhos, Caramelo, Manga",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:honduras-tres-santos",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "not-only-barista-blend",
+      "name": "NOT ONLY BARISTA - BLEND",
+      "url": "https://shop.senzucoffee.com/products/not-only-barista-blend",
+      "available": true,
+      "purpose": "espresso",
+      "origin": {
+        "producer": null,
+        "cultivar": [],
+        "process": null,
+        "altitude": null,
+        "harvest": null
+      },
+      "notes": [
+        "Chocolate",
+        "caramelo",
+        "fruta madura"
+      ],
+      "price": {
+        "amount": 13,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/04-26-ES-NOT-ONLY-BARISTA-MOCKUP_f4cdb400-f088-4003-8353-b9314b71fbd3.png?v=1784031197",
+      "description": "Origem:\n70% Brasil - Sra Aparecida - Natural\n30% Honduras - Tres Santos - Natural\n\nNotas: Chocolate, caramelo,  fruta madura",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:not-only-barista-blend",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "uganda-kigezi",
+      "name": "UGANDA - KIGEZI",
+      "url": "https://shop.senzucoffee.com/products/uganda-kigezi",
+      "available": true,
+      "purpose": "filter",
+      "origin": {
+        "producer": "Mountain Harvest Cooperative",
+        "cultivar": [
+          "Nyasaland"
+        ],
+        "process": "Natural",
+        "altitude": "2000-2200m",
+        "harvest": null
+      },
+      "notes": [
+        "Framboesa",
+        "Mel",
+        "Maçã",
+        "Floral"
+      ],
+      "price": {
+        "amount": 17.5,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/08-26-UGANDA-KIGEZI-NATURAL-MOCKUP.png?v=1789575849",
+      "description": "Origem: Uganda - Kigezi\n\nProdutor: Mountain Harvest Cooperative\n\nProcesso: Natural\nVariedade: Nyasaland\nAltitude: 2000-2200m\n\nNotas: Framboesa, Mel, Maçã, Floral",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:uganda-kigezi",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "roaster": "senzu",
+      "roasterSlug": "uganda-kigezi-anaerobic",
+      "name": "UGANDA - KIGEZI",
+      "url": "https://shop.senzucoffee.com/products/uganda-kigezi-anaerobic",
+      "available": true,
+      "purpose": "filter",
+      "origin": {
+        "producer": "Mountain Harvest Cooperative",
+        "cultivar": [
+          "Nyasaland"
+        ],
+        "process": "Anaerobic Natural",
+        "altitude": "2000-2200m",
+        "harvest": null
+      },
+      "notes": [
+        "Morango",
+        "Mirtilo",
+        "Nibs de Cacau",
+        "Baunilha"
+      ],
+      "price": {
+        "amount": 17.5,
+        "currency": "EUR"
+      },
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0971/7845/2355/files/08-26-UGANDA-KIGEZI-MOCKUP.png?v=1789576335",
+      "description": "Origem: Uganda - Kigezi\n\nProdutor: Mountain Harvest Cooperative\n\nProcesso: Anaerobic Natural\nVariedade: Nyasaland\nAltitude: 2000-2200m\n\nNotas: Morango, Mirtilo, Nibs de Cacau, Baunilha",
+      "weightOptions": [
+        "250gr",
+        "1000gr"
+      ],
+      "id": "senzu:uganda-kigezi-anaerobic",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "history": [
+        {
+          "date": "2026-10-06",
+          "status": "available"
         }
       ]
     }
