@@ -1,0 +1,54 @@
+export const PURPOSES = [
+  { value: 'all', label: 'All' },
+  { value: 'general', label: 'General' },
+  { value: 'espresso', label: 'Espresso' },
+  { value: 'filter', label: 'Filter' },
+  { value: 'both', label: 'Espresso & Filter' },
+];
+
+export function filterCoffees(coffees, { roaster, purpose, query, availability }) {
+  const normalizedQuery = query.trim().toLowerCase();
+  return coffees.filter((coffee) => {
+    if (roaster !== 'all' && coffee.roaster !== roaster) return false;
+    if (purpose !== 'all' && coffee.purpose !== purpose) return false;
+    if (availability === 'available' && !coffee.available) return false;
+    if (availability === 'unavailable' && coffee.available) return false;
+    if (normalizedQuery) {
+      const haystack = [
+        coffee.name,
+        coffee.roaster,
+        coffee.origin.producer || '',
+        coffee.origin.process || '',
+        ...(coffee.notes || []),
+      ]
+        .join(' ')
+        .toLowerCase();
+      if (!haystack.includes(normalizedQuery)) return false;
+    }
+    return true;
+  });
+}
+
+export function sortCoffees(coffees, sort = 'name') {
+  const sorted = [...coffees];
+  if (sort === 'name') {
+    sorted.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sort === 'roaster') {
+    sorted.sort(
+      (a, b) => a.roaster.localeCompare(b.roaster) || a.name.localeCompare(b.name)
+    );
+  } else if (sort === 'availability') {
+    sorted.sort(
+      (a, b) => Number(b.available) - Number(a.available) || a.name.localeCompare(b.name)
+    );
+  }
+  return sorted;
+}
+
+export function formatPrice(price) {
+  if (!price) return '';
+  return new Intl.NumberFormat('en-IE', {
+    style: 'currency',
+    currency: price.currency || 'EUR',
+  }).format(price.amount);
+}
