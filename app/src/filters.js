@@ -6,13 +6,12 @@ export const PURPOSES = [
   { value: 'both', label: 'Espresso & Filter' },
 ];
 
-export function filterCoffees(coffees, { roaster, purpose, query, availability }) {
+export function filterCoffees(coffees, { roaster, purpose, query, unavailableOnly }) {
   const normalizedQuery = query.trim().toLowerCase();
   return coffees.filter((coffee) => {
     if (roaster !== 'all' && coffee.roaster !== roaster) return false;
     if (purpose !== 'all' && coffee.purpose !== purpose) return false;
-    if (availability === 'available' && !coffee.available) return false;
-    if (availability === 'unavailable' && coffee.available) return false;
+    if (unavailableOnly && coffee.available) return false;
     if (normalizedQuery) {
       const haystack = [
         coffee.name,
@@ -41,6 +40,16 @@ export function sortCoffees(coffees, sort = 'name') {
     sorted.sort(
       (a, b) => Number(b.available) - Number(a.available) || a.name.localeCompare(b.name)
     );
+  } else if (sort === 'price-asc' || sort === 'price-desc') {
+    const direction = sort === 'price-asc' ? 1 : -1;
+    sorted.sort((a, b) => {
+      const aPrice = a.price ? a.price.amount : null;
+      const bPrice = b.price ? b.price.amount : null;
+      if (aPrice === null && bPrice === null) return a.name.localeCompare(b.name);
+      if (aPrice === null) return 1;
+      if (bPrice === null) return -1;
+      return (aPrice - bPrice) * direction || a.name.localeCompare(b.name);
+    });
   }
   return sorted;
 }
