@@ -49,8 +49,13 @@ describe("filterCoffees", () => {
     expect(filterCoffees(coffees, { roaster: "7g" }).map((c) => c.id)).toEqual(["7g:b"]);
   });
 
-  it("filters by purpose", () => {
-    expect(filterCoffees(coffees, { purpose: "espresso" }).map((c) => c.id)).toEqual(["olisipo:a"]);
+  it("includes espresso & filter coffees under espresso and under filter", () => {
+    expect(filterCoffees(coffees, { purpose: "espresso" }).map((c) => c.id)).toEqual(["olisipo:a", "olisipo:c"]);
+    expect(filterCoffees(coffees, { purpose: "filter" }).map((c) => c.id)).toEqual(["7g:b", "olisipo:c"]);
+  });
+
+  it("keeps the espresso & filter option to those coffees only", () => {
+    expect(filterCoffees(coffees, { purpose: "both" }).map((c) => c.id)).toEqual(["olisipo:c"]);
   });
 
   it("hides unavailable coffees", () => {

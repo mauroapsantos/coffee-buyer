@@ -26,11 +26,17 @@ export const SORTS = [
 ] as const;
 export type Sort = (typeof SORTS)[number]["value"] | "name" | "roaster";
 
+/** "Espresso & Filter" coffees count as espresso and as filter. */
+export function matchesPurpose(coffeePurpose: string, wanted: string): boolean {
+  if (coffeePurpose === wanted) return true;
+  return coffeePurpose === "both" && (wanted === "espresso" || wanted === "filter");
+}
+
 export function filterCoffees<T extends Filterable>(coffees: T[], { roaster, purpose, query, hideUnavailable }: Filters): T[] {
   const q = (query ?? "").trim().toLowerCase();
   return coffees.filter((c) => {
     if (roaster && roaster !== "all" && c.roaster !== roaster) return false;
-    if (purpose && purpose !== "all" && c.purpose !== purpose) return false;
+    if (purpose && purpose !== "all" && !matchesPurpose(c.purpose, purpose)) return false;
     if (hideUnavailable && !c.available) return false;
     if (q) {
       const haystack = [c.name, c.roaster, c.producer ?? "", c.process ?? "", ...c.notes].join(" ").toLowerCase();
