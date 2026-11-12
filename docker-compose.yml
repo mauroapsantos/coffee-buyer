@@ -1,0 +1,44 @@
+# Coffee Buyer on one machine: database, website and the scheduled scraper.
+# Everything restarts on its own after a reboot.
+#   docker compose up -d --build
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: coffee
+      POSTGRES_PASSWORD: coffee
+      POSTGRES_DB: coffee
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U coffee"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build: { context: ., target: app }
+    image: coffee-buyer-app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://coffee:coffee@db:5432/coffee
+      TZ: Europe/Lisbon
+    ports:
+      - "${WEB_PORT:-3001}:3000"
+    depends_on:
+      db: { condition: service_healthy }
+
+  worker:
+    image: coffee-buyer-app
+    restart: unless-stopped
+    command: ["pnpm", "worker"]
+    environment:
+      DATABASE_URL: postgres://coffee:coffee@db:5432/coffee
+      TZ: Europe/Lisbon
+    depends_on:
+      db: { condition: service_healthy }
+      web: { condition: service_started }
+
+volumes:
+  pgdata:
