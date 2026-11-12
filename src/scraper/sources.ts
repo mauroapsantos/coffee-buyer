@@ -1,5 +1,16 @@
 // Per-roaster adapters (ported from scraper/sources.js; same rules).
-import { fetchAllProducts, fetchJson, fetchSitemap, parseLabeledFields, sleep, splitList, stripHtml } from "./http";
+import {
+  REQUEST_DELAY_MS,
+  fetchAllProducts,
+  fetchJson,
+  fetchSitemap,
+  fetchText,
+  parseLabeledFields,
+  sleep,
+  splitList,
+  stripHtml,
+} from "./http";
+import { parseSevenGPage } from "./sevengPage";
 import type { Purpose, ScrapedCoffee } from "./types";
 
 const OLISIPO_BASE = "https://olisipo.coffee";
@@ -146,7 +157,38 @@ export async function scrapeSevenG(): Promise<ScrapedCoffee[]> {
       grindOptions: [],
     });
   }
+
+  await addSevenGDetails(coffees);
   return coffees;
+}
+
+/**
+ * Fill in tasting notes and origin from each public product page, since the
+ * API has none. One page every 1.5 s; a page that fails is just skipped.
+ */
+async function addSevenGDetails(coffees: ScrapedCoffee[]) {
+  for (const coffee of coffees) {
+    await sleep(REQUEST_DELAY_MS);
+    let details;
+    try {
+      details = parseSevenGPage(await fetchText(coffee.url));
+    } catch {
+      continue;
+    }
+    coffee.notes = details.notes;
+    coffee.origin = {
+      ...coffee.origin,
+      producer: details.producer ?? coffee.origin.producer,
+      process: details.process ?? coffee.origin.process,
+      cultivar: details.cultivar.length ? details.cultivar : coffee.origin.cultivar,
+      altitude: details.altitude ?? coffee.origin.altitude,
+    };
+    // Sold-out coffees only come from the sitemap: use the page's real title and image.
+    if (!coffee.available) {
+      if (details.name) coffee.name = details.name;
+      coffee.imageUrl ??= details.imageUrl;
+    }
+  }
 }
 
 async function fetchSenzuProducts(url: string): Promise<ShopifyProduct[]> {
