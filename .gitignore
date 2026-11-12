@@ -1,6 +1,8 @@
 node_modules/
-app/dist/
+.next/
+.home/
+*.tsbuildinfo
+.env
+next-env.d.ts
 *.log
 .DS_Store
-
-dist-single/

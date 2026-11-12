@@ -1,0 +1,34 @@
+{
+  "name": "coffee-buyer",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.18.3",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start -H 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "cli": "tsx src/cli.ts",
+    "worker": "tsx src/jobs/worker.ts"
+  },
+  "dependencies": {
+    "croner": "^9.0.0",
+    "drizzle-orm": "^0.44.0",
+    "next": "^15.5.0",
+    "postgres": "^3.4.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tsx": "^4.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "drizzle-kit": "^0.31.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  }
+}

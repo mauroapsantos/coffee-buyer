@@ -1,45 +1,58 @@
 # coffee-buyer
 
-My centralized app to browse coffee before buying. Gives me origin, purpose (general, espresso, filter) and allows me to keep track of which ones I bought. Is able to distinct which coffees are no longer available, even if the origin is the same, the producer may be different but the history of process is kept.
+My centralized app to browse coffee before buying. Gives me origin, purpose (general, espresso, filter) and lets me keep track of which ones I bought. It can tell which coffees are no longer available: even if the origin is the same, the producer may be different, and the history of each lot is kept.
 
-## First iteration
+Every coffee in the list links straight to the roaster's shop page.
 
-- **Web PWA** (React + Vite). Installable on iOS/Android via the browser; a native wrap (Capacitor) can come later.
-- **Local-first**: your purchased list lives in `localStorage` on your device; the catalog is a JSON snapshot shipped with the app.
-- **Scrapers** for [Olisipo](https://olisipo.coffee) and [7g Roaster](https://roaster.7groaster.pt), kept updated daily by a GitHub Actions workflow.
+- **Roasters:** [Olisipo](https://olisipo.coffee), [7g Roaster](https://roaster.7groaster.pt) and [Senzu](https://shop.senzucoffee.com).
+- **Runs on the Raspberry Pi** with Docker, the same way as ptgamedeals: Postgres, a Next.js site and a worker that scrapes once a day.
+- **History:** the database records every availability change and every price change. Cards show "New", "Back in stock" and price-drop badges.
+- **Bought marks** are saved in the database, so every device sees the same list.
 
-### Careful scraping
-
-Both roasters run WooCommerce shops with public **Store API** endpoints, so no fragile HTML parsing is needed. The scraper:
-
-- uses the official `User-Agent: coffee-buyer/1.0` and rate-limits requests (~1.5s between pages),
-- reads only public product data (no cart/checkout/admin routes; robots.txt disallows are respected),
-- detects sold-out coffees even when they vanish from the storefront API — 7g hides sold-out products from their API, so the scraper cross-checks the public product sitemap and marks anything missing as unavailable,
-- keeps a per-coffee **availability history** (`history: [{date, status}]`) so the process/producer story of each coffee is preserved across seasons, even if the same origin returns next year as a new lot.
-
-### Layout
-
-```
-scraper/
-  roasters.js   shared HTTP + parsing helpers
-  sources.js    per-roaster adapters (Store API + sitemap)
-  catalog.js    merge logic preserving availability history
-  update.js     entry point: scrape -> merge -> write data/catalog.json
-  copy-catalog.js  copies the catalog into the app bundle
-data/catalog.json   shared catalog snapshot (checked in)
-app/                React PWA (Vite)
-.github/workflows/  daily catalog refresh
-```
-
-### Use
+## Run it
 
 ```bash
-# refresh the catalog manually
-node scraper/update.js
+docker compose up -d --build
+```
 
-# run the web app locally
-cd app && npm install && npm run dev
+- Site: <http://localhost:3001> (or `http://<pi-ip>:3001`). Change the port with `WEB_PORT` in `.env`.
+- The worker applies migrations on start and scrapes every day at **06:30 Lisbon time**. If the last good scrape is more than 20 hours old, it also scrapes as soon as it starts.
+- On an empty database, the worker first imports `data/catalog.json`, the last snapshot from the old GitHub Pages app, so first-seen dates and availability history carry over.
 
-# run tests
-cd app && npm test
+## Careful scraping
+
+All three shops have public product APIs (the WooCommerce Store API and Shopify's `products.json`), so no fragile HTML parsing is needed.
+
+- Requests use the `coffee-buyer` User-Agent and wait about 1.5 s between pages.
+- Only public product data is read: no cart, checkout or admin routes.
+- 7g hides sold-out coffees from its API. The scraper cross-checks the public product sitemap and marks anything missing from the API as unavailable.
+- Each roaster is scraped separately. If one shop is down, its coffees are left as they were instead of being marked sold out.
+
+## Development
+
+Node isn't needed on the host. `scripts/n` runs any command in a Node 22 container with the repo mounted:
+
+```bash
+docker compose up -d db
+scripts/n pnpm install
+scripts/n pnpm test
+scripts/n pnpm typecheck
+PORTS=3001:3000 scripts/n pnpm dev     # dev server on :3001
+scripts/n pnpm cli scrape              # scrape now
+scripts/n pnpm cli stats
+scripts/n pnpm cli import:json <file>  # seed from an old catalog.json
+```
+
+After changing `src/db/schema.ts`, run `scripts/n pnpm db:generate` and commit the new migration.
+
+## Layout
+
+```
+src/scraper/   per-roaster adapters (sources.ts) and HTTP/parsing helpers
+src/catalog/   merge rules: what changed since the last scrape
+src/jobs/      scrape + import tasks, daily worker
+src/db/        Drizzle schema and migrations
+src/web/       list queries, filters and sorting
+app/           Next.js site (one page: the coffee list)
+data/          catalog.json seed from the old app
 ```
